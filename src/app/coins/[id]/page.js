@@ -38,7 +38,9 @@ export default function CoinDetailsPage() {
     }
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  {
+    isLoading && <p>Loading...</p>;
+  }
   if (error) return <p className="text-red-400">{error.message}</p>;
 
   return (

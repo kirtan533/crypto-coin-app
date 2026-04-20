@@ -3,6 +3,7 @@
 import useDebounce from "@/hooks/useDebounce";
 import { fetchCoins } from "@/libs/fetchCoins";
 import { searchCoins } from "@/libs/searchCoins";
+import CardSkeleton from "@/ui/CardSkeleton";
 import CoinCard from "@/ui/CoinCard";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -32,7 +33,6 @@ export default function CoinsPage() {
   const {
     data: coins,
     isLoading,
-    isFetching,
     error,
   } = useQuery({
     queryKey: isSearching
@@ -51,12 +51,6 @@ export default function CoinsPage() {
     }
   }, []);
 
-  {
-    isLoading && <p>Loading...</p>;
-  }
-  {
-    isFetching && !isLoading && <p>Updating...</p>;
-  }
   if (error) return <p className="text-red-400">Error While Fetching Coins</p>;
 
   return (
@@ -125,22 +119,33 @@ export default function CoinsPage() {
       </div>
 
       {/* Coins Grid */}
-      <div
-        className="grid gap-6 justify-items-center 
-              grid-cols-[repeat(auto-fit,minmax(220px,1fr))]"
-      >
-        {coins?.map((i) => (
-          <div key={i.id} className="w-full max-w-[250px]">
-            <CoinCard
-              id={i.id}
-              name={i.name}
-              price={i.current_price}
-              img={i.image || i.thumb}
-              symbol={i.symbol}
-              currencySymbol={currencySymbol}
-            />
+      <div className="grid gap-6 justify-items-center grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
+        {isLoading ? (
+          Array.from({ length: 10 }).map((_, i) => <CardSkeleton key={i} />)
+        ) : coins?.length === 0 ? (
+          <div className="col-span-full flex flex-col items-center justify-center py-20 gap-4">
+            <p className="text-4xl">🔍</p>
+            <p className="text-xl font-semibold text-gray-500">
+              No coins found for "{debounceSearch}"
+            </p>
+            <p className="text-sm text-gray-400">
+              Try searching something else
+            </p>
           </div>
-        ))}
+        ) : (
+          coins?.map((i) => (
+            <div key={i.id} className="w-full max-w-[250px]">
+              <CoinCard
+                id={i.id}
+                name={i.name}
+                price={i.current_price}
+                img={i.image || i.thumb}
+                symbol={i.symbol}
+                currencySymbol={currencySymbol}
+              />
+            </div>
+          ))
+        )}
       </div>
 
       {/* Pagination */}
