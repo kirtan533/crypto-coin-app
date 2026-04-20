@@ -13,7 +13,7 @@ export default function CoinCard({
     <Link href={`/coins/${id}`}>
       <div className="w-52 shadow-md p-8  rounded-xl transition-all duration-300  m-4 hover:scale-110 flex flex-col items-center gap-2 overflow-hidden">
         <Image
-          src={img}
+          src={img || "/no-image.png"}
           width={50}
           height={50}
           className="object-contain"

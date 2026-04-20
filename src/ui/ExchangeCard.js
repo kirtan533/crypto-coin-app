@@ -6,7 +6,7 @@ export default function ExchangeCard({ name, img, rank, url }) {
     <Link href={url} target={"_blank"}>
       <div className="w-52 shadow-md p-8  rounded-xl transition-all duration-300  m-4 hover:scale-110 flex flex-col items-center gap-2 overflow-hidden">
         <Image
-          src={img}
+          src={img || "/no-image.png"}
           width={100}
           height={100}
           alt="exchange image"

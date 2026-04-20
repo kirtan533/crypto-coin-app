@@ -4,10 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function CoinDetailsPage() {
+  const router = useRouter();
   const params = useParams();
   const id = params.id;
 
@@ -29,6 +30,13 @@ export default function CoinDetailsPage() {
       return data;
     },
   });
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      router.push("/login");
+    }
+  }, []);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p className="text-red-400">{error.message}</p>;
