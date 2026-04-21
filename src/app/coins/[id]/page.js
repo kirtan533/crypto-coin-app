@@ -1,5 +1,6 @@
 "use client";
 
+import CoinDetailsSkeleton from "@/ui/CoinDetailsSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
@@ -38,9 +39,7 @@ export default function CoinDetailsPage() {
     }
   }, []);
 
-  {
-    isLoading && <p>Loading...</p>;
-  }
+  if (isLoading) return <CoinDetailsSkeleton />;
   if (error) return <p className="text-red-400">{error.message}</p>;
 
   return (
