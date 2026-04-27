@@ -3,8 +3,20 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import CoinImg from "../../public/btc.png";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user]);
+
   return (
     <div className="bg-black w-full h-[100vh] flex justify-center items-center flex-col">
       <motion.div

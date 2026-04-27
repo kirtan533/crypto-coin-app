@@ -6,9 +6,11 @@ import { searchCoins } from "@/libs/searchCoins";
 import CardSkeleton from "@/ui/CardSkeleton";
 import CoinCard from "@/ui/CoinCard";
 import { useQuery } from "@tanstack/react-query";
+import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+import { auth } from "@/firebase/config";
 
 export default function CoinsPage() {
   const router = useRouter();
@@ -45,10 +47,12 @@ export default function CoinsPage() {
   });
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      router.push("/login");
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/login");
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
   if (error) return <p className="text-red-400">Error While Fetching Coins</p>;

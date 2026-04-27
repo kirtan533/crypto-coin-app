@@ -1,9 +1,11 @@
 "use client";
 
+import { auth } from "@/firebase/config";
 import { fetchExchanges } from "@/libs/fetchExchanges";
 import CardSkeleton from "@/ui/CardSkeleton";
 import ExchangeCard from "@/ui/ExchangeCard";
 import { useQuery } from "@tanstack/react-query";
+import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -17,10 +19,12 @@ export default function ExchangePage() {
   });
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      router.push("/login");
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/login");
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
   if (error) return <p>Error: {error.message}</p>;
