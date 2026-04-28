@@ -1,5 +1,7 @@
 "use client";
 
+import { auth } from "@/firebase/config";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,19 +18,14 @@ export default function Navbar() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const checkUser = () => {
-      const stored = localStorage.getItem("user");
-      setUser(stored ? JSON.parse(stored) : null);
-    };
-    checkUser();
-    window.addEventListener("userChanged", checkUser);
-    return () => window.removeEventListener("userChanged", checkUser);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    window.dispatchEvent(new Event("userChanged"));
-    setUser(null);
+  const logout = async () => {
+    await signOut(auth);
     router.push("/login");
   };
 
@@ -58,7 +55,7 @@ export default function Navbar() {
             <button
               onClick={logout}
               className="px-4 py-1.5 sm:px-5 sm:py-2 text-md sm:text-base 
-                     bg-red-500 hover:bg-red-600 text-white rounded-lg transition"
+              bg-red-500 hover:bg-red-600 text-white rounded-lg transition"
             >
               Logout
             </button>

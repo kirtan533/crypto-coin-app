@@ -9,8 +9,11 @@ export default function ExchangeCard({ name, img, rank, url }) {
           src={img || "/no-image.png"}
           width={100}
           height={100}
+          style={{ height: "auto" }}
           alt="exchange image"
           className="w-10 h-10 object-contain"
+          loading="eager"
+          priority
         />
         <h1 className="text-xl font-bold truncate w-full text-center">
           {rank}

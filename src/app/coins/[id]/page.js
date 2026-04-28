@@ -1,11 +1,13 @@
 "use client";
 
+import { auth } from "@/firebase/config";
 import CoinDetailsSkeleton from "@/ui/CoinDetailsSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function CoinDetailsPage() {
@@ -13,8 +15,10 @@ export default function CoinDetailsPage() {
   const params = useParams();
   const id = params.id;
 
-  const [currency, setCurrency] = useState("inr");
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page") || 1;
 
+  const [currency, setCurrency] = useState("inr");
   const currencySymbol =
     currency === "inr" ? "₹" : currency === "eur" ? "€" : "$";
 
@@ -33,10 +37,12 @@ export default function CoinDetailsPage() {
   });
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      router.push("/login");
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/login");
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
   if (isLoading) return <CoinDetailsSkeleton />;
@@ -45,7 +51,7 @@ export default function CoinDetailsPage() {
   return (
     <>
       <div className="container mx-auto max-w-7xl px-4 mt-5">
-        <Link href={`/coins`}>⬅️Back To Coinlist</Link>
+        <Link href={`/coins?page=${page}`}>⬅️Back To Coins</Link>
         <div className="p-8">
           <div className="flex gap-4">
             <label className="flex items-center gap-2 cursor-pointer">
@@ -89,6 +95,7 @@ export default function CoinDetailsPage() {
             src={coins?.image.large}
             width={64}
             height={64}
+            style={{ height: "auto" }}
             className="object-contain"
             alt="coin"
           />

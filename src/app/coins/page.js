@@ -7,15 +7,16 @@ import CardSkeleton from "@/ui/CardSkeleton";
 import CoinCard from "@/ui/CoinCard";
 import { useQuery } from "@tanstack/react-query";
 import { onAuthStateChanged } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { auth } from "@/firebase/config";
 
 export default function CoinsPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const page = Number(searchParams.get("page")) || 1;
 
-  const [page, setPage] = useState(1);
   const [currency, setCurrency] = useState("inr");
 
   const [search, setSearch] = useState("");
@@ -24,8 +25,8 @@ export default function CoinsPage() {
   const currencySymbol =
     currency === "inr" ? "₹" : currency === "eur" ? "€" : "$";
 
-  const changePage = (page) => {
-    setPage(page);
+  const changePage = (newPage) => {
+    router.push(`/coins?page=${newPage}`);
   };
 
   const btns = new Array(132).fill(1);
@@ -68,7 +69,10 @@ export default function CoinsPage() {
               type="radio"
               value="inr"
               checked={currency === "inr"}
-              onChange={() => setCurrency("inr")}
+              onChange={() => {
+                setCurrency("inr");
+                router.push(`/coins?page=1`);
+              }}
               className="accent-blue-500"
             />
             INR
@@ -79,7 +83,10 @@ export default function CoinsPage() {
               type="radio"
               value="usd"
               checked={currency === "usd"}
-              onChange={() => setCurrency("usd")}
+              onChange={() => {
+                setCurrency("usd");
+                router.push(`/coins?page=1`);
+              }}
               className="accent-blue-500"
             />
             USD
@@ -90,7 +97,10 @@ export default function CoinsPage() {
               type="radio"
               value="eur"
               checked={currency === "eur"}
-              onChange={() => setCurrency("eur")}
+              onChange={() => {
+                setCurrency("eur");
+                router.push(`/coins?page=1`);
+              }}
               className="accent-blue-500"
             />
             EUR
@@ -106,7 +116,7 @@ export default function CoinsPage() {
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
-                setPage(1);
+                router.push(`/coins?page=1`);
               }}
               className="w-full pl-10 pr-4 py-2.5 sm:py-3 
                      text-sm sm:text-base
@@ -146,6 +156,7 @@ export default function CoinsPage() {
                 img={i.image || i.thumb}
                 symbol={i.symbol}
                 currencySymbol={currencySymbol}
+                page={page}
               />
             </div>
           ))

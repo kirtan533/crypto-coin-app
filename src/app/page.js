@@ -26,10 +26,12 @@ export default function Home() {
         <Image
           width={600}
           height={600}
-          loading="eager"
           className="object-contain"
+          style={{ height: "auto" }}
           src={CoinImg}
           alt="coin image"
+          loading="eager"
+          priority
         />
       </motion.div>
       <p className="text-6xl text-center font-light text-white -mt-10">
