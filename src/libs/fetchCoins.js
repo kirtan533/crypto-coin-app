@@ -1,16 +1,9 @@
-import axios from "axios";
-
-export const fetchCoins = async (currency, page, search) => {
-  const { data } = await axios.get(
-    `https://api.coingecko.com/api/v3/coins/markets`,
+export const fetchCoins = async (currency, page) => {
+  const res = await fetch(
+    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&page=${page}&per_page=20`,
     {
-      params: {
-        vs_currency: currency,
-        page: page,
-        per_page: 20,
-        ids: search || undefined,
-      },
+      next: { revalidate: 60 }, //cache for 60 sec
     },
   );
-  return data;
+  return res.json();
 };

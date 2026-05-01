@@ -26,7 +26,7 @@ export default function CoinCard({
         </h2>
         <p className="truncate w-full text-center">{name}</p>
         <p className="truncate w-full text-center">
-          {price ? `${currencySymbol}${price}` : "NA"}
+          {price ? `${currencySymbol}${price.toFixed(2)}` : "NA"}
         </p>
       </div>
     </Link>
