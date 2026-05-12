@@ -9,11 +9,13 @@ import {
 export default async function CoinsPage({ searchParams }) {
   const queryClient = new QueryClient();
 
-  const page = searchParams.page ? Number(searchParams.page) : 1;
+  const params = await searchParams;
+
+  const page = params.page ? Number(params.page) : 1;
 
   const validCurrencies = ["inr", "usd", "eur"];
-  const currency = validCurrencies.includes(searchParams.currency)
-    ? searchParams.currency
+  const currency = validCurrencies.includes(params.currency)
+    ? params.currency
     : "inr";
 
   //prefetch🔥

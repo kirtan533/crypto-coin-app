@@ -6,8 +6,6 @@ import useDebounce from "@/hooks/useDebounce";
 import { useQuery } from "@tanstack/react-query";
 import { searchCoins } from "@/libs/searchCoins";
 import { fetchCoins } from "@/libs/fetchCoins";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase/config";
 import { IoSearchOutline } from "react-icons/io5";
 import CardSkeleton from "@/ui/CardSkeleton";
 import CoinCard from "@/ui/CoinCard";
@@ -70,15 +68,6 @@ export default function CoinsClient() {
       updateParams({ search: debounceSearch, page: 1 });
     }
   }, [debounceSearch]);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.push("/login");
-      }
-    });
-    return () => unsubscribe();
-  }, []);
 
   return (
     <div className="container mx-auto max-w-7xl px-4 mb-10">

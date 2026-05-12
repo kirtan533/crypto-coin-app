@@ -1,14 +1,11 @@
 "use client";
 
-import { auth } from "@/firebase/config";
 import { fetchCoinDetails } from "@/libs/fetchCoinDetails";
 import CoinDetailsSkeleton from "@/ui/CoinDetailsSkeleton";
 import { useQuery } from "@tanstack/react-query";
-import { onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 export default function CoinDetailsClient({ id, currency }) {
   const router = useRouter();
@@ -28,15 +25,6 @@ export default function CoinDetailsClient({ id, currency }) {
     staleTime: 1000 * 60 * 5,
     retry: 2,
   });
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.push("/login");
-      }
-    });
-    return () => unsubscribe();
-  }, []);
 
   const updateParams = (key, value) => {
     const params = new URLSearchParams(searchParams.toString());

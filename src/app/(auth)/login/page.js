@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { login } from "@/services/auth";
 import toast from "react-hot-toast";
 
@@ -13,14 +13,18 @@ export default function LoginPage() {
     isSubmitting,
     formState: { errors },
   } = useForm();
+
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const from = searchParams.get("from");
 
   const handleLogin = async (data) => {
     try {
       await login(data.email, data.password);
       toast.success("Login successful 🎉");
       reset();
-      router.push("/");
+      router.replace(from || "/");
     } catch (error) {
       toast.error(error.message);
     }
