@@ -5,7 +5,6 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import CoinDetailsClient from "./CoinDetailsClient";
-import ProtectedRoutes from "@/ui/component/ProtectedRoutes";
 
 export default async function CoinDetailsPage({ params, searchParams }) {
   const { id } = await params;
@@ -20,10 +19,8 @@ export default async function CoinDetailsPage({ params, searchParams }) {
   });
 
   return (
-    <ProtectedRoutes>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <CoinDetailsClient id={id} currency={currency} />
-      </HydrationBoundary>
-    </ProtectedRoutes>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <CoinDetailsClient id={id} currency={currency} />
+    </HydrationBoundary>
   );
 }
