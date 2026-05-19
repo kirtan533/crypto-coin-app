@@ -45,9 +45,9 @@ export default function LoginForm() {
     <div className="flex items-center justify-center min-h-[80vh]">
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="bg-white p-6 rounded-2xl shadow-md w-full max-w-sm"
+        className="bg-gray-900 p-6 rounded-2xl shadow-md w-full max-w-sm"
       >
-        <h2 className="text-xl font-bold mb-4 text-black">Login</h2>
+        <h2 className="text-xl font-bold mb-4 text-white">Login</h2>
 
         {/* Email */}
         <input
@@ -59,7 +59,7 @@ export default function LoginForm() {
             },
           })}
           placeholder="Email"
-          className="w-full p-2 mb-3 border rounded-lg text-black"
+          className="w-full p-2 mb-3 border border-gray-600 bg-gray-700 rounded-lg text-white"
         />
         {errors.email && (
           <p className="text-red-500 text-sm mb-2">{errors.email.message}</p>
@@ -76,7 +76,7 @@ export default function LoginForm() {
           })}
           type="password"
           placeholder="Password"
-          className="w-full p-2 mb-4 border rounded-lg text-black"
+          className="w-full p-2 mb-4 border border-gray-600 rounded-lg bg-gray-700 text-white"
         />
         {errors.password && (
           <p className="text-red-500 text-sm mb-2">{errors.password.message}</p>
@@ -85,12 +85,11 @@ export default function LoginForm() {
         {/* Button */}
         <button
           disabled={isSubmitting}
-          className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 disabled:opacity-50"
+          className="w-full bg-white text-black hover:opacity-80 transition cursor-pointer  py-2 rounded-lg  disabled:opacity-50"
           type="submit"
         >
           {isSubmitting ? "Logging in..." : "Login"}
         </button>
-
         <p
           className="mt-3 text-sm text-center cursor-pointer text-blue-500"
           onClick={() => router.push("/signup")}
@@ -100,7 +99,7 @@ export default function LoginForm() {
         <button
           type="button"
           onClick={handleDemoLogin}
-          className="w-full mt-3 border py-2 rounded-lg hover:bg-gray-100 transition font-medium text-black"
+          className="w-full mt-3 border py-2 rounded-lg  transition font-medium text-white cursor-pointer hover:opacity-80"
         >
           Login as Demo User
         </button>

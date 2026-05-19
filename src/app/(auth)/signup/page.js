@@ -32,9 +32,9 @@ export default function SignupPage() {
     <div className="flex items-center justify-center min-h-[80vh]">
       <form
         onSubmit={handleSubmit(handleSignup)}
-        className="bg-white p-6 rounded-xl shadow-md w-full max-w-sm"
+        className="bg-gray-900 text-white p-6 rounded-xl shadow-md w-full max-w-sm"
       >
-        <h2 className="text-xl font-bold mb-4 text-gray-500">Signup</h2>
+        <h2 className="text-xl font-bold mb-4 text-white">Signup</h2>
         <input
           {...register("email", {
             required: "Email is required",
@@ -44,7 +44,7 @@ export default function SignupPage() {
             },
           })}
           placeholder="Email"
-          className="w-full p-2 mb-3 border rounded-lg text-black"
+          className="w-full p-2 mb-3 border rounded-lg text-white bg-gray-800 placeholder-gray-400 border-gray-600"
         />
         {errors.email && (
           <p className="text-red-500 text-sm mb-2">{errors.email.message}</p>
@@ -63,7 +63,7 @@ export default function SignupPage() {
           })}
           type="password"
           placeholder="Password"
-          className="w-full p-2 mb-3 border rounded-lg text-black"
+          className="w-full p-2 mb-3 border rounded-lg bg-gray-800 text-white placeholder-gray-400 border-gray-600"
         />
         {errors.password && (
           <p className="text-red-500 text-sm mb-2">{errors.password.message}</p>
@@ -76,7 +76,7 @@ export default function SignupPage() {
           })}
           type="password"
           placeholder="Confirm Password"
-          className="w-full p-2 mb-4 border rounded-lg text-black"
+          className="w-full p-2 mb-4 border rounded-lg bg-gray-800 text-white placeholder-gray-400 border-gray-600"
         />
         {errors.confirmPassword && (
           <p className="text-red-500 text-sm mb-2">
@@ -85,7 +85,7 @@ export default function SignupPage() {
         )}
         <button
           type="submit"
-          className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 cursor-pointer"
+          className="w-full bg-white text-black py-2 rounded-lg hover:opacity-80 transition cursor-pointer"
         >
           Signup
         </button>
