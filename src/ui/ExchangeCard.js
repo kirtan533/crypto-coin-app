@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function ExchangeCard({ name, img, rank, url }) {
   return (
     <Link href={url} target={"_blank"}>
-      <div className="w-52 shadow-md p-8  rounded-xl transition-all duration-300  m-4 hover:scale-110 flex flex-col items-center gap-2 overflow-hidden">
+      <div className="w-52 shadow-md p-8 bg-gray-800 text-white  rounded-xl transition-all duration-300  m-4 hover:scale-110 flex flex-col items-center gap-2 overflow-hidden">
         <Image
           src={img || "/no-image.png"}
           width={100}

@@ -70,7 +70,7 @@ export default function CoinsClient() {
   }, [debounceSearch]);
 
   return (
-    <div className="container mx-auto max-w-7xl px-4 mb-10">
+    <div className="container mx-auto max-w-7xl px-4">
       {/* Top Section */}
       <div className="py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         {/* Currency Filters */}

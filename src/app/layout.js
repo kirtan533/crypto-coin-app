@@ -2,7 +2,7 @@ import Navbar from "@/layout/Navbar";
 import "./globals.css";
 import QueryProvider from "@/ui/QueryProvider";
 import Footer from "@/layout/Footer";
-import { AuthProvider } from "@/context/AuthContext";
+import { AuthProvider } from "@/app/context/AuthContext";
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen bg-gray-800 text-white">
         <AuthProvider>
           <QueryProvider>
             <Navbar />

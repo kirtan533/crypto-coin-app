@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import CoinImg from "../../public/btc.png";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import ProtectedRoutes from "@/ui/component/ProtectedRoutes";

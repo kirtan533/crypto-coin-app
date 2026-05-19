@@ -1,21 +1,21 @@
 const Skeleton = ({ className }) => (
-  <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
+  <div className={`animate-pulse bg-gray-200 rounded ${className} shimmer`} />
 );
 
 export default function CoinDetailsSkeleton() {
   return (
-    <div className="container mx-auto max-w-7xl px-4 mt-5">
+    <div className="container mx-auto max-w-7xl px-4 shimmer">
       {/* Back button */}
       <Skeleton className="w-40 h-5 mb-6" />
 
       {/* Currency selector */}
-      <div className="flex gap-4 p-8">
+      <div className="flex gap-4 p-8 shimmer">
         <Skeleton className="w-16 h-5" />
         <Skeleton className="w-16 h-5" />
         <Skeleton className="w-16 h-5" />
       </div>
 
-      <div className="flex flex-col items-start gap-4 p-16 w-full">
+      <div className="flex flex-col items-start gap-4 p-16 w-full shimmer">
         {/* Last updated */}
         <Skeleton className="w-56 h-4 self-center" />
 
@@ -23,7 +23,7 @@ export default function CoinDetailsSkeleton() {
         <Skeleton className="w-16 h-16 rounded-full" />
 
         {/* Name + Price + Change */}
-        <div className="flex flex-col gap-2 w-40">
+        <div className="flex flex-col gap-2 w-40 shimmer">
           <Skeleton className="w-24 h-4" />
           <Skeleton className="w-32 h-6" />
           <Skeleton className="w-20 h-4" />
@@ -33,9 +33,9 @@ export default function CoinDetailsSkeleton() {
         <Skeleton className="w-16 h-8 rounded" />
 
         {/* Custom Bar */}
-        <div className="w-full flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2 shimmer">
           <Skeleton className="w-full h-2 rounded-full" />
-          <div className="flex justify-between w-full">
+          <div className="flex justify-between w-full shimmer">
             <Skeleton className="w-20 h-4" />
             <Skeleton className="w-24 h-4" />
             <Skeleton className="w-20 h-4" />
@@ -43,7 +43,7 @@ export default function CoinDetailsSkeleton() {
         </div>
 
         {/* Stats list */}
-        <div className="w-full p-4">
+        <div className="w-full p-4 shimmer">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="flex justify-between w-full my-4">
               <Skeleton className="w-32 h-4" />

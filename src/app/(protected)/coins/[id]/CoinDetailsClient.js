@@ -71,7 +71,7 @@ export default function CoinDetailsClient({ id, currency }) {
   }
 
   return (
-    <div className="container mx-auto max-w-7xl px-4 mt-5">
+    <div className="container mx-auto max-w-7xl px-4 p-4">
       <Link href={`/coins?${searchParams.toString()}`}>⬅️Back To Coins</Link>
       <div className="p-8">
         <div className="flex gap-4">
@@ -116,7 +116,7 @@ export default function CoinDetailsClient({ id, currency }) {
           <Image src={coins.image.large} width={64} height={64} alt="coin" />
         )}
         <div className="flex flex-col gap-1">
-          <p className="text-sm text-gray-700">{coins?.name}</p>
+          <p className="text-sm text-white">{coins?.name}</p>
           <p className="text-2xl font-bold">
             {currencySymbol}
             {coins?.market_data?.current_price?.[currency]}

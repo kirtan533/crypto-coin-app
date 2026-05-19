@@ -35,9 +35,9 @@ export default function ExchangePage() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto max-w-7xl px-4 mt-6">
+      <div className="container mx-auto max-w-7xl px-4">
         <div className="grid gap-6 justify-items-center grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
-          {Array.from({ length: 10 }).map((_, i) => (
+          {Array.from({ length: 15 }).map((_, i) => (
             <CardSkeleton key={i} />
           ))}
         </div>
@@ -49,17 +49,14 @@ export default function ExchangePage() {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
         <p className="text-4xl">⚠️</p>
+
         <p className="text-xl font-semibold text-red-400">
           Failed to load exchanges
         </p>
-        {error?.message?.toLowerCase().includes("too many") && (
-          <p className="text-sm text-gray-400">
-            Too many requests. Please wait a few seconds...
-          </p>
-        )}
+
         <button
           onClick={() => refetch()}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
         >
           Retry
         </button>
@@ -74,21 +71,18 @@ export default function ExchangePage() {
   }
 
   return (
-    <div className="container mx-auto max-w-7xl px-4 mt-6">
+    <div className="container mx-auto max-w-7xl px-4">
       <div className="grid gap-6 justify-items-center grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
-        {data.map((i) => (
+        {data.map((exchange) => (
           <ExchangeCard
-            key={i.id}
-            name={i.name}
-            img={i.image}
-            rank={i.trust_score_rank}
-            url={i.url}
+            key={exchange.id}
+            name={exchange.name}
+            img={exchange.image}
+            rank={exchange.trust_score_rank}
+            url={exchange.url}
           />
         ))}
       </div>
-      {isFetching && (
-        <p className="text-center text-gray-400 mt-4">Updating...</p>
-      )}
     </div>
   );
 }
