@@ -34,8 +34,7 @@ export default function SignupPage() {
         onSubmit={handleSubmit(handleSignup)}
         className="bg-white p-6 rounded-xl shadow-md w-full max-w-sm"
       >
-        <h2 className="text-xl font-bold mb-4">Signup</h2>
-
+        <h2 className="text-xl font-bold mb-4 text-gray-500">Signup</h2>
         <input
           {...register("email", {
             required: "Email is required",
@@ -45,7 +44,7 @@ export default function SignupPage() {
             },
           })}
           placeholder="Email"
-          className="w-full p-2 mb-3 border rounded-lg"
+          className="w-full p-2 mb-3 border rounded-lg text-black"
         />
         {errors.email && (
           <p className="text-red-500 text-sm mb-2">{errors.email.message}</p>
@@ -64,7 +63,7 @@ export default function SignupPage() {
           })}
           type="password"
           placeholder="Password"
-          className="w-full p-2 mb-3 border rounded-lg"
+          className="w-full p-2 mb-3 border rounded-lg text-black"
         />
         {errors.password && (
           <p className="text-red-500 text-sm mb-2">{errors.password.message}</p>
@@ -77,7 +76,7 @@ export default function SignupPage() {
           })}
           type="password"
           placeholder="Confirm Password"
-          className="w-full p-2 mb-4 border rounded-lg"
+          className="w-full p-2 mb-4 border rounded-lg text-black"
         />
         {errors.confirmPassword && (
           <p className="text-red-500 text-sm mb-2">

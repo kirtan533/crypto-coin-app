@@ -47,7 +47,7 @@ export default function LoginForm() {
         onSubmit={handleSubmit(handleLogin)}
         className="bg-white p-6 rounded-2xl shadow-md w-full max-w-sm"
       >
-        <h2 className="text-xl font-bold mb-4">Login</h2>
+        <h2 className="text-xl font-bold mb-4 text-black">Login</h2>
 
         {/* Email */}
         <input
@@ -59,7 +59,7 @@ export default function LoginForm() {
             },
           })}
           placeholder="Email"
-          className="w-full p-2 mb-3 border rounded-lg"
+          className="w-full p-2 mb-3 border rounded-lg text-black"
         />
         {errors.email && (
           <p className="text-red-500 text-sm mb-2">{errors.email.message}</p>
@@ -76,7 +76,7 @@ export default function LoginForm() {
           })}
           type="password"
           placeholder="Password"
-          className="w-full p-2 mb-4 border rounded-lg"
+          className="w-full p-2 mb-4 border rounded-lg text-black"
         />
         {errors.password && (
           <p className="text-red-500 text-sm mb-2">{errors.password.message}</p>
@@ -100,7 +100,7 @@ export default function LoginForm() {
         <button
           type="button"
           onClick={handleDemoLogin}
-          className="w-full mt-3 border py-2 rounded-lg hover:bg-gray-100 transition font-medium"
+          className="w-full mt-3 border py-2 rounded-lg hover:bg-gray-100 transition font-medium text-black"
         >
           Login as Demo User
         </button>

@@ -107,7 +107,7 @@ export default function CoinDetailsClient({ id, currency }) {
           </label>
         </div>
       </div>
-      <div className="flex flex-col items-start gap-4 p-16">
+      <div className="flex flex-col items-start gap-4 md:p-16 p-10">
         {isFetching && <p className="text-center text-gray-400">Updating...</p>}
         <p className="text-sm self-center opacity-70 font-semibold">
           Last Updates On {Date(coins?.market_data?.last_updated).split("G")[0]}
@@ -116,7 +116,7 @@ export default function CoinDetailsClient({ id, currency }) {
           <Image src={coins.image.large} width={64} height={64} alt="coin" />
         )}
         <div className="flex flex-col gap-1">
-          <p className="text-sm text-white">{coins?.name}</p>
+          <p className="text-sm text-whi">{coins?.name}</p>
           <p className="text-2xl font-bold">
             {currencySymbol}
             {coins?.market_data?.current_price?.[currency]}
